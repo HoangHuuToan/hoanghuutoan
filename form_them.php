@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="width:500px;margin:50px auto">
 
-        <label for="">Họ Tên:</label> <br>
-        <input type="text" name="name"> <br> <br>
-
-        <label for="">ID Nhân Viên:</label> <br>
-        <input type="text" name="idnv"> <br> <br>
-
-        <label for="">Tuổi</label> <br>
-        <input type="text" name="age"> <br> <br>
-
-        <label for="">Giới Tính</label> <br>
-        <input type="radio" name="gener" value="Nam"> Nam <br>
-        <input type="radio" name="gener" value="Nữ"> Nữ <br> <br>
-
-        <label for="">Quê Quán</label> <br>
-        <input type="text" name="country"> <br> <br>
-
-        <input type="submit" value="Thêm Nhân Viên">
-    </form>
-
-    <?php
+<?php
+    include 'form.html';
 class DB_Driver
 {
     /*biến lưu trữ địa chỉ,phương thức connect*/
@@ -92,15 +64,17 @@ class DB_Driver
 
         return mysqli_query($this->__conn, $sql);
     }
-    function delete($table, $data, $where)
-    {
+    function delete($table, $where){
+        // Kết nối
         $this->connect();
-        $sql = '';
-        //lặp data
-        foreach ($data as $key => $value) {
-            $sql = 'DELETE FROM ' . $table . ' WHERE' . $where;
+     
+        // Delete
+        $sql = "DELETE FROM $table WHERE $where";
+        $result = mysqli_query($this->__conn, $sql);
+        if(!$result)
+        {
+            die('Không tồn tại dữ liệu bạn muốn xóa');
         }
-
         return mysqli_query($this->__conn, $sql);
     }
     function get_list($sql)
@@ -154,13 +128,11 @@ else
 {
     $DB = new DB_Driver;
     $DB->insert('nhanvien',['HoTen'=>$_POST['name'],
-                        'IDNhanVien'=>$_POST['idnv'],
-                        'Tuoi'=>$_POST['age'],
-                        'GioiTinh'=>$_POST['gener'],
-                        'QueQuan'=>$_POST['country']] );
+                           'MaNV'=>$_POST['idnv'],
+                           'Tuoi'=>$_POST['age'],
+                           'GioiTinh'=>$_POST['gener'],
+                           'QueQuan'=>$_POST['country']] );
 }
 
 
 ?>
-</body>
-</html>
