@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="width:500px;margin:50px auto">
-
-        <h3>Nhập Thông Tin Nhân Viên Cần Xóa:</h3>
-        <label for="">Họ Tên:</label> <br>
-        <input type="text" name="name"> <br> <br>
-
-        <label for="">ID Nhân Viên:</label> <br>
-        <input type="text" name="idnv"> <br> <br>
-
-        <input type="submit" value="Xóa">
-    </form>
 
     <?php
+    include 'form.html';
 class DB_Driver
 {
     /*biến lưu trữ địa chỉ,phương thức connect*/
@@ -146,10 +127,8 @@ if($_POST['name']==''||$_POST['idnv']=='')
 else
 {
     $DB = new DB_Driver;
-    $DB->delete('nhanvien',"IDNhanVien = '".$_POST['idnv']."'");
+    $DB->delete('nhanvien',"MaNV = '".$_POST['idnv']."'");
 }
 
 
 ?>
-</body>
-</html>
