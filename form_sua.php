@@ -148,13 +148,20 @@ class DB_Driver
 
 $DB = new DB_Driver;
 
-$DB->update('nhanvien', [ 'HoTen'=>$_POST['name'],
+if($_POST['name']==''||$_POST['idnv']==''||$_POST['age']==''||$_POST['gener']==''||$_POST['country']=='')
+{
+    echo 'Cảnh Báo Bạn Chưa Nhập Đủ Thông Tin Xin Mời Nhập Lại!!!';
+}
+else
+{
+    $DB->update('nhanvien', [ 'HoTen'=>$_POST['name'],
                         'IDNhanVien'=>$_POST['idnv'],
                         'Tuoi'=>$_POST['age'],
                         'GioiTinh'=>$_POST['gener'],
                         'QueQuan'=>$_POST['country']],
                         " IDNhanVien="."'".$_POST['idnv']."'"); 
 
+}   
 ?>
 </body>
 </html>
